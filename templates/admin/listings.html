@@ -1,0 +1,8 @@
+{% extends "base.html" %}{% block content %}<h2 class="section-title">Manage movies & events</h2><div class="row g-4"><div class="col-lg-5"><div class="panel"><h5>Add listing</h5><form method="post">
+<label class="form-label">Title</label><input class="form-control mb-2" name="title" required>
+<label class="form-label">Type</label><select class="form-select mb-2" name="category"><option>Movie</option><option>Event</option></select>
+<label class="form-label">Venue</label><input class="form-control mb-2" name="venue" required>
+<label class="form-label">Image URL (optional)</label><input class="form-control mb-2" name="image_url">
+<label class="form-label">Description</label><textarea class="form-control mb-3" name="description" rows="3"></textarea>
+<button class="btn btn-primary">Add listing</button></form></div></div>
+<div class="col-lg-7"><div class="panel"><h5>Existing listings</h5>{% for item in listings %}<div class="admin-item"><div><b>{{ item.title }}</b><div class="small text-secondary">{{ item.category }} · {{ item.venue }}</div><a class="small" href="{{ url_for('admin_shows', listing_id=item.id) }}">Manage shows</a></div><form method="post" action="{{ url_for('delete_listing', listing_id=item.id) }}" onsubmit="return confirm('Delete listing and its shows?')"><button class="btn btn-sm btn-outline-danger">Delete</button></form></div>{% else %}<p class="text-secondary">No listings.</p>{% endfor %}</div></div></div>{% endblock %}

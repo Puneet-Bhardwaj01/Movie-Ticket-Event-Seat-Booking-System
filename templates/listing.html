@@ -1,0 +1,7 @@
+{% extends "base.html" %}{% block content %}
+<a href="{{ url_for('index') }}" class="small text-decoration-none">← Back to explore</a>
+<div class="row g-4 mt-1"><div class="col-md-5">{% if listing.image_url %}<img class="detail-img" src="{{ listing.image_url }}" alt="{{ listing.title }}">{% endif %}</div>
+<div class="col-md-7"><span class="badge text-bg-light">{{ listing.category }}</span><h1 class="mt-2">{{ listing.title }}</h1><p class="text-secondary">{{ listing.venue }}</p><p>{{ listing.description }}</p>
+<h4 class="mt-4">Available shows</h4>
+{% for show in shows %}<div class="show-row"><div><b>{{ show.show_date.strftime('%d %b %Y') }}</b><div class="small text-secondary">{{ show.show_time.strftime('%I:%M %p') }}</div></div><a class="btn btn-primary" href="{{ url_for('seats', show_id=show.id) }}">Choose seats</a></div>
+{% else %}<p class="text-secondary">No upcoming shows have been scheduled.</p>{% endfor %}</div></div>{% endblock %}

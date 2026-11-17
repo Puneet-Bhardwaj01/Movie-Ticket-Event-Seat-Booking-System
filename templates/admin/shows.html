@@ -1,0 +1,9 @@
+{% extends "base.html" %}{% block content %}<a href="{{ url_for('admin_listings') }}" class="small">← Listings</a><h2 class="section-title mt-2">Manage shows: {{ listing.title }}</h2>
+<div class="panel mb-4"><form method="post" class="row g-2 align-items-end">
+<div class="col-md-3"><label class="form-label">Date</label><input class="form-control" type="date" name="show_date" required></div>
+<div class="col-md-2"><label class="form-label">Time</label><input class="form-control" type="time" name="show_time" required></div>
+<div class="col-md-2"><label class="form-label">Silver ₹</label><input class="form-control" type="number" min="1" step="1" name="silver_price" value="150" required></div>
+<div class="col-md-2"><label class="form-label">Gold ₹</label><input class="form-control" type="number" min="1" step="1" name="gold_price" value="220" required></div>
+<div class="col-md-2"><label class="form-label">Platinum ₹</label><input class="form-control" type="number" min="1" step="1" name="platinum_price" value="300" required></div>
+<div class="col-md-1"><button class="btn btn-primary">Add</button></div></form></div>
+<div class="panel"><h5>Scheduled shows</h5>{% for show in shows %}<div class="admin-item"><span>{{ show.show_date.strftime('%d %b %Y') }} · {{ show.show_time.strftime('%I:%M %p') }}</span><span class="small text-secondary">Silver ₹{{ show.silver_price }} / Gold ₹{{ show.gold_price }} / Platinum ₹{{ show.platinum_price }}</span></div>{% else %}<p class="text-secondary">No shows scheduled.</p>{% endfor %}</div>{% endblock %}
